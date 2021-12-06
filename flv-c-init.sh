@@ -1,3 +1,14 @@
+# .bashrc
+echo "LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
+export LD_LIBRARY_PATH
+# >>> CUDA >>>
+export CUDA_HOME=/usr/local/cuda
+export LD_LIBRARY_PATH=${CUDA_HOME}/lib64
+PATH=${CUDA_HOME}/bin:${PATH}
+export PATH
+export LD_LIBRARY_PATH=${LD_LIBRARY_PATH:+${LD_LIBRARY_PATH}:}/usr/local/cuda/extras/CUPTI/lib64
+# <<< CUDA <<<" >> ~/.bashrc
+
 julia -e "import Pkg; ENV[\"PYTHON\"]=\"\";
 	Pkg.add(\"PyCall\"); Pkg.build(\"PyCall\")"
 julia -e "import Pkg; Pkg.add(\"PyPlot\")"
@@ -34,6 +45,3 @@ mkdir ~/lock
 
 # change default conda env to Julia conda
 ~/.julia/conda/3/bin/conda init bash
-
-echo "LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
-export LD_LIBRARY_PATH" >> ~/.bashrc
