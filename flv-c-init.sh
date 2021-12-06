@@ -34,3 +34,6 @@ mkdir ~/lock
 
 # change default conda env to Julia conda
 ~/.julia/conda/3/bin/conda init bash
+
+echo "LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
+export LD_LIBRARY_PATH" >> ~/.bashrc
