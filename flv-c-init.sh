@@ -34,6 +34,7 @@ cd ~/src
 rm ~/src/pytorch-3dunet
 git clone git@github.com:flavell-lab/pytorch-3dunet
 cd ~/src/pytorch-3dunet
+git checkout develop
 pip install .
 
 # other packages
