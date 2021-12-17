@@ -22,7 +22,7 @@ pip install torch==1.8.2+cu111 torchvision==0.9.2+cu111 torchaudio==0.8.2 -f htt
 # unet2d
 mkdir -p ~/src
 cd ~/src
-rm ~/src/unet2d
+rm -r ~/src/unet2d
 git clone git@github.com:flavell-lab/unet2d.git
 cd ~/src/unet2d
 git checkout develop
@@ -31,7 +31,7 @@ pip install .
 # pytorch-3dunet
 pip install nd2reader hdbscan tensorboard tensorboardX h5py simpleitk
 cd ~/src
-rm ~/src/pytorch-3dunet
+rm -r ~/src/pytorch-3dunet
 git clone git@github.com:flavell-lab/pytorch-3dunet
 cd ~/src/pytorch-3dunet
 git checkout develop
@@ -42,7 +42,7 @@ julia -e "import Pkg; pkg = Pkg.PackageSpec(name=\"FlavellPkg\", url=\"git@githu
 julia -e "using FlavellPkg; FlavellPkg.install_default(); FlavellPkg.install_imaging(true);"
 
 # set up lock directory
-mkdir ~/lock
+mkdir -p ~/lock
 
 # change default conda env to Julia conda
 ~/.julia/conda/3/bin/conda init bash
