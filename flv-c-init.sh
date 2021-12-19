@@ -19,21 +19,25 @@ julia -e "import Pkg; Pkg.add(\"PyPlot\")"
 # torch
 pip install torch==1.8.2+cu111 torchvision==0.9.2+cu111 torchaudio==0.8.2 -f https://download.pytorch.org/whl/lts/1.8/torch_lts.html
 
+# src dir
+date_str=$(date +'%Y-%m-%d')
+path_dir_src=/home/$USER/setup-src-$date_str
+
 # unet2d
-mkdir -p ~/src
-cd ~/src
-rm -rf ~/src/unet2d
+mkdir -p $path_dir_src
+cd $path_dir_src
+rm -rf $path_dir_src/unet2d
 git clone git@github.com:flavell-lab/unet2d.git
-cd ~/src/unet2d
+cd $path_dir_src/unet2d
 git checkout develop
 pip install .
 
 # pytorch-3dunet
 pip install nd2reader hdbscan tensorboard tensorboardX h5py simpleitk
-cd ~/src
-rm -rf ~/src/pytorch-3dunet
+cd $path_dir_src
+rm -rf $path_dir_src/pytorch-3dunet
 git clone git@github.com:flavell-lab/pytorch-3dunet
-cd ~/src/pytorch-3dunet
+cd $path_dir_src/pytorch-3dunet
 git checkout develop
 pip install .
 
@@ -43,6 +47,9 @@ julia -e "using FlavellPkg; FlavellPkg.install_default(); FlavellPkg.install_ima
 
 # set up lock directory
 mkdir -p ~/lock
+
+# remove temp src dir
+rm -rf $path_dir_src
 
 # change default conda env to Julia conda
 ~/.julia/conda/3/bin/conda init bash
