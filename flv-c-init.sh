@@ -45,6 +45,9 @@ pip install .
 julia -e "import Pkg; pkg = Pkg.PackageSpec(name=\"FlavellPkg\", url=\"git@github.com:flavell-lab/FlavellPkg.jl.git\", rev=\"develop\"); Pkg.add(pkg)"
 julia -e "using FlavellPkg; FlavellPkg.install_default(); FlavellPkg.install_imaging(true);"
 
+# install kernel
+julia -e "using IJulia; IJulia.installkernel(\"Julia\")"
+
 # set up lock directory
 mkdir -p ~/lock
 
