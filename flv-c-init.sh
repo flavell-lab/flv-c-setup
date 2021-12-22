@@ -4,15 +4,30 @@ path_dir_src=/home/$USER/src
 path_dir_src_temp=/home/$USER/setup-src-$date_str
 
 ##### .bashrc
-echo "LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
-export LD_LIBRARY_PATH
-# >>> CUDA >>>
+# CUDA
+if grep -Fq ">>> flv - CUDA >>>" ~/.bashrc
+then
+echo "CUDA path already added"
+else
+echo "# >>> flv - CUDA >>>
 export CUDA_HOME=/usr/local/cuda
 export LD_LIBRARY_PATH=${CUDA_HOME}/lib64
 PATH=${CUDA_HOME}/bin:${PATH}
 export PATH
 export LD_LIBRARY_PATH=${LD_LIBRARY_PATH:+${LD_LIBRARY_PATH}:}/usr/local/cuda/extras/CUPTI/lib64
-# <<< CUDA <<<" >> ~/.bashrc
+# <<< flv - CUDA <<<" >> ~/.bashrc
+fi
+
+# LD_LIBRARY_PATH
+if grep -Fq ">>> flv - LD_LIBRARY_PATH >>>" ~/.bashrc
+then
+echo "LD_LIBRARY_PATH path already added"
+else
+echo "# >>> flv - LD_LIBRARY_PATH >>>
+LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
+export LD_LIBRARY_PATH
+# <<< flv - LD_LIBRARY_PATH <<<" >> ~/.bashrc
+fi
 
 #### julia - pycall
 julia -e "import Pkg; ENV[\"PYTHON\"]=\"\";
