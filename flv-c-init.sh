@@ -56,11 +56,10 @@ cd $path_dir_src
 rm -rf $path_dir_src/pytorch-3dunet
 git clone git@github.com:flavell-lab/pytorch-3dunet
 cd $path_dir_src/pytorch-3dunet
-git checkout develop
 pip install .
 
 #### julia packages
-julia -e "import Pkg; pkg = Pkg.PackageSpec(name=\"FlavellPkg\", url=\"git@github.com:flavell-lab/FlavellPkg.jl.git\", rev=\"develop\"); Pkg.add(pkg)"
+julia -e "import Pkg; pkg = Pkg.PackageSpec(name=\"FlavellPkg\", url=\"git@github.com:flavell-lab/FlavellPkg.jl.git\"); Pkg.add(pkg)"
 julia -e "using FlavellPkg; FlavellPkg.install_default(); FlavellPkg.install_imaging(false);"
 
 # install kernel
