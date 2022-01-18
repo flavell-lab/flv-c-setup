@@ -47,7 +47,7 @@ cd $path_dir_src_temp
 rm -rf $path_dir_src_temp/unet2d
 git clone git@github.com:flavell-lab/unet2d.git
 cd $path_dir_src_temp/unet2d
-git checkout develop
+git checkout v0.1
 pip install .
 
 # py - pytorch-3dunet
