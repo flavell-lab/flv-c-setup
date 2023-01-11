@@ -38,8 +38,11 @@ julia -e "import Pkg; Pkg.add(\"PyPlot\")"
 # activate julia conda
 . ~/.julia/conda/3/bin/activate
 
+# update conda
+conda update --all
+
 # torch
-pip install torch==1.8.2+cu111 torchvision==0.9.2+cu111 torchaudio==0.8.2 -f https://download.pytorch.org/whl/lts/1.8/torch_lts.html
+pip install torch torchvision torchaudio
 
 # py - unet2d
 mkdir -p $path_dir_src_temp
