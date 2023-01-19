@@ -12,8 +12,7 @@ else
 echo "# >>> flv - CUDA >>>
 export CUDA_HOME=/usr/local/cuda
 export LD_LIBRARY_PATH=${CUDA_HOME}/lib64
-PATH=${CUDA_HOME}/bin:${PATH}
-export PATH
+export PATH=${CUDA_HOME}/bin:${PATH}
 export LD_LIBRARY_PATH=${LD_LIBRARY_PATH:+${LD_LIBRARY_PATH}:}/usr/local/cuda/extras/CUPTI/lib64
 # <<< flv - CUDA <<<" >> ~/.bashrc
 fi
