@@ -62,7 +62,12 @@ pip install .
 
 #### julia packages
 julia -e "import Pkg; pkg = Pkg.PackageSpec(name=\"FlavellPkg\", url=\"git@github.com:flavell-lab/FlavellPkg.jl.git\"); Pkg.add(pkg)"
-julia -e "using FlavellPkg; FlavellPkg.install_default(); FlavellPkg.install_imaging(false); FlavellPkg.install_CePNEM(false);"
+julia -e "using FlavellPkg; FlavellPkg.install_default();"
+julia -e "using FlavellPkg; FlavellPkg.install_imaging(false);"
+julia -e "using FlavellPkg; FlavellPkg.install_CePNEM(false);"
+
+# precompile packages
+julia -e "using Pkg; Pkg.instantiate(); Pkg.precompile();"
 
 # install kernel
 julia -e "using IJulia; IJulia.installkernel(\"Julia\")"
