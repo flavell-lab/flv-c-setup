@@ -35,7 +35,7 @@ julia -e "import Pkg; Pkg.add(\"PyPlot\")"
 
 #### python package
 # activate julia conda
-. ~/.julia/conda/3/bin/activate
+. ~/.julia/conda/3/x86_64/bin/activate
 
 # update conda
 conda update --all
@@ -78,6 +78,3 @@ mkdir -p ~/lock
 
 # remove temp src dir
 rm -rf $path_dir_src_temp
-
-# change default conda env to Julia conda
-~/.julia/conda/3/bin/conda init bash
