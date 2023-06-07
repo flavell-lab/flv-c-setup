@@ -78,3 +78,5 @@ mkdir -p ~/lock
 
 # remove temp src dir
 rm -rf $path_dir_src_temp
+rm /tmp/installer.sh
+
