@@ -13,7 +13,7 @@ julia -e "import Pkg; Pkg.add(\"PyPlot\")"
 . ~/.julia/conda/3/x86_64/bin/activate
 
 # update conda
-conda update --all
+conda update --all -y
 
 # torch
 pip install torch torchvision torchaudio
