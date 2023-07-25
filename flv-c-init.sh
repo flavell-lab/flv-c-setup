@@ -6,8 +6,7 @@ path_dir_src_temp=/home/$USER/setup-src-$date_str
 #### julia - pycall
 julia -e "import Pkg; ENV[\"PYTHON\"]=\"\";
 	Pkg.add(\"PyCall\"); Pkg.build(\"PyCall\")"
-julia -e "import Pkg; Pkg.add(\"PyPlot\")"
-
+ 
 #### python package
 # activate julia conda
 . ~/.julia/conda/3/x86_64/bin/activate
@@ -28,7 +27,7 @@ git checkout v0.1
 pip install .
 
 # py - pytorch-3dunet
-pip install nd2reader hdbscan tensorboard tensorboardX h5py simpleitk matplotlib
+pip install matplotlib nd2reader hdbscan tensorboard tensorboardX h5py simpleitk
 cd $path_dir_src
 rm -rf $path_dir_src/pytorch-3dunet
 git clone git@github.com:flavell-lab/pytorch-3dunet
@@ -36,6 +35,7 @@ cd $path_dir_src/pytorch-3dunet
 pip install .
 
 #### julia packages
+julia -e "import Pkg; Pkg.add(\"PyPlot\")" # pyplot
 julia -e "import Pkg; pkg = Pkg.PackageSpec(name=\"FlavellPkg\", url=\"git@github.com:flavell-lab/FlavellPkg.jl.git\"); Pkg.add(pkg)"
 julia -e "using FlavellPkg; FlavellPkg.install_default();"
 julia -e "using FlavellPkg; FlavellPkg.install_ANTSUN(false);"
