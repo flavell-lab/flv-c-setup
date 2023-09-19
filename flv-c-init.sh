@@ -26,6 +26,13 @@ cd $path_dir_src_temp/unet2d
 git checkout v0.1
 pip install .
 
+cd $path_dir_src_temp
+rm -rf $path_dir_src_temp/euler_gpu
+git clone git@github.com:flavell-lab/euler_gpu.git
+cd $path_dir_src_temp/euler_gpu
+pip install .
+
+
 # py - pytorch-3dunet
 pip install matplotlib nd2reader hdbscan tensorboard tensorboardX h5py simpleitk
 cd $path_dir_src
