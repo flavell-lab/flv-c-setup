@@ -34,7 +34,7 @@ pip install .
 
 
 # py - pytorch-3dunet
-pip install matplotlib nd2reader hdbscan tensorboard tensorboardX h5py simpleitk yaml
+pip install matplotlib nd2reader hdbscan tensorboard tensorboardX h5py simpleitk pyyaml
 cd $path_dir_src
 rm -rf $path_dir_src/pytorch-3dunet
 git clone git@github.com:flavell-lab/pytorch-3dunet
