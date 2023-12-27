@@ -6,7 +6,7 @@ This script installs all the necessary packages and dependencies to run ANTSUN a
 This package installation script requires you to be using a Linux distribution; it has been tested on Ubuntu, though other distributions could also work. To use `ANTSUN`, you also need have a working GPU with at least 8GB of dedicated memory, and you need to have previously installed all the relevant NVIDIA drivers, CUDA, and CUDNN.
 
 ## Usage
-Download the `flv-c-init.sh` file and simply execute it from a terminal, eg `sh flv-c-init.sh`. You may need to set up your GitHub SSH keys, see below.
+Set up your `ssh` keys with GitHub if you haven't already (see below), download the `flv-c-init.sh` file, and simply execute it from a terminal (eg `sh flv-c-init.sh`).
 
 ## Set up `ssh` keys
 ### SSH key  - GitHub
