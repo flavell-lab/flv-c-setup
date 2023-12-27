@@ -6,4 +6,46 @@ This script installs all the necessary packages and dependencies to run ANTSUN a
 This package installation script requires you to be using a Linux distribution; it has been tested on Ubuntu, though other distributions could also work. To use `ANTSUN`, you also need have a working GPU with at least 8GB of dedicated memory, and you need to have previously installed all the relevant NVIDIA drivers, CUDA, and CUDNN.
 
 ## Usage
-Download the `flv-c-init.sh` file and simply execute it from a terminal, eg `sh flv-c-init.sh`.
+Download the `flv-c-init.sh` file and simply execute it from a terminal, eg `sh flv-c-init.sh`. You may need to set up your GitHub SSH keys, see below.
+
+## Set up `ssh` keys
+### SSH key  - GitHub
+Open a terminal on the computer where you're trying to install the packages. Modify the email address below and run the command: 
+```
+ssh-keygen -m PEM -t ed25519 -C “email-you-used-for-github@email.com”
+ssh-keyscan github.com >> ~/.ssh/known_hosts
+```
+
+Add your key on github: 
+- Go to your GitHub settings on the account you intend to use for accessing lab packages, then navigate to "SSH and GPG keys"
+- Click the "New SSH key" button, then paste in the contents of the file (run `cat ~/.ssh/id_ed25519.pub`, or whatever file the key was saved in)
+- Ensure there are no newlines after the contents you paste.
+
+### Set up `ssh-agent`:
+Copy and paste the following, appending it to your `~/.profile` file:
+```
+SSH_ENV="$HOME/.ssh/agent-environment"
+
+function start_agent {
+    echo "Initializing new SSH agent..."
+    /usr/bin/ssh-agent | sed 's/^echo/#echo/' > "${SSH_ENV}"
+    echo succeeded
+    chmod 600 "${SSH_ENV}"
+    . "${SSH_ENV}" > /dev/null
+    /usr/bin/ssh-add;
+}
+
+# Source SSH settings, if applicable
+
+if [ -f "${SSH_ENV}" ]; then
+    . "${SSH_ENV}" > /dev/null
+    #ps ${SSH_AGENT_PID} doesn't work under cywgin
+    ps -ef | grep ${SSH_AGENT_PID} | grep ssh-agent$ > /dev/null || {
+        start_agent;
+    }
+else
+    start_agent;
+fi
+```
+
+Close and re-open your shell.
