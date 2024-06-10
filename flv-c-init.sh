@@ -45,7 +45,7 @@ pip install .
 #### julia packages again
 julia -e "import Pkg; Pkg.add(\"PyPlot\")" # pyplot
 julia -e "using Pkg; pkg = Pkg.PackageSpec(name=\"FlavellPkg\", url=\"git@github.com:flavell-lab/FlavellPkg.jl.git\"); Pkg.add(pkg)"
-julia -e "using Pkg; pkg = Pkg.PackageSpec(name=\"FlavellPkg\", url=\"git@github.com:flavell-lab/FlavellPkg.jl.git\", rev=\"dev\"); Pkg.add(pkg)" #temporary
+# julia -e "using Pkg; pkg = Pkg.PackageSpec(name=\"FlavellPkg\", url=\"git@github.com:flavell-lab/FlavellPkg.jl.git\", rev=\"dev\"); Pkg.add(pkg)" #disabled after testing and merging FlavellPkg.jl#dev
 julia -e "using FlavellPkg; FlavellPkg.install_default();"
 julia -e "using FlavellPkg; FlavellPkg.install_ANTSUN(false);"
 julia -e "using FlavellPkg; FlavellPkg.install_CePNEM(false);"
