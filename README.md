@@ -49,7 +49,7 @@ fi
 ```
 Close and re-open your shell.
 
-```
+
 ## Install packages with flv-c-setup
 ### When you are starting from a clean slate (i.e. new, empty Julia environment)
 ```
