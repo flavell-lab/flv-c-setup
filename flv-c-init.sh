@@ -1,3 +1,5 @@
+#!/bin/bash
+
 ##### src dir
 date_str=$(date +'%Y-%m-%d')
 path_dir_src=/home/$USER/src
@@ -14,26 +16,28 @@ julia -e "import Pkg; ENV[\"PYTHON\"]=\"\";
 # update conda
 conda update --all -y
 
-# torch
-pip install torch torchvision torchaudio
+# public py libraries - torch, tensorflow, cuda
+pip install torch torchvision torchaudio 
+python3 -m pip install tensorflow==2.15
+python3 -m pip install cuda
 
-# py - unet2d
+# private fork of public library - deepreg
+# private py packages - unet2d, euler_gpu, autolabel
+# src code will be erased from home directory after installation
+declare -a repos=(unet2d euler_gpu DeepReg autolabel)
 mkdir -p $path_dir_src_temp
-cd $path_dir_src_temp
-rm -rf $path_dir_src_temp/unet2d
-git clone git@github.com:flavell-lab/unet2d.git
-cd $path_dir_src_temp/unet2d
-git checkout v0.1
-pip install .
+for repo in "${repos[@]}"; do
+    cd $path_dir_src_temp
+    rm -rf $path_dir_src_temp/$repo  # Remove the existing repository directory, if it exists
+    git clone git@github.com:flavell-lab/$repo.git
+    cd $path_dir_src_temp/$repo    
+    if [ $repo == unet2d ]; then  # For 'unet2d', checkout a specific version
+        git checkout v0.1
+    fi
+    pip install .
+done
 
-cd $path_dir_src_temp
-rm -rf $path_dir_src_temp/euler_gpu
-git clone git@github.com:flavell-lab/euler_gpu.git
-cd $path_dir_src_temp/euler_gpu
-pip install .
-
-
-# py - pytorch-3dunet
+# private py package - pytorch-3dunet, src code will remain in home directory after installation
 pip install matplotlib nd2reader hdbscan tensorboard tensorboardX h5py simpleitk pyyaml
 cd $path_dir_src
 rm -rf $path_dir_src/pytorch-3dunet
@@ -53,10 +57,6 @@ julia -e "using Pkg; Pkg.instantiate(); Pkg.precompile();"
 
 # install kernel
 julia -e "using IJulia; IJulia.installkernel(\"Julia\")"
-
-#### misc
-# set up lock directory
-mkdir -p ~/lock
 
 # remove temp src dir
 rm -rf $path_dir_src_temp
