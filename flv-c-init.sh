@@ -1,11 +1,9 @@
-#!/bin/sh
-
 ##### src dir
 date_str=$(date +'%Y-%m-%d')
 path_dir_src=/home/$USER/src
 path_dir_src_temp=/home/$USER/setup-src-$date_str
 
-#### julia - pycall
+#### julia - build pycall
 julia -e "import Pkg; ENV[\"PYTHON\"]=\"\";
 	Pkg.add(\"PyCall\"); Pkg.build(\"PyCall\")"
  
@@ -44,7 +42,7 @@ git clone git@github.com:flavell-lab/pytorch-3dunet
 cd $path_dir_src/pytorch-3dunet
 pip install .
 
-#### julia packages
+#### julia packages again
 julia -e "import Pkg; Pkg.add(\"PyPlot\")" # pyplot
 julia -e "using Pkg; pkg = Pkg.PackageSpec(name=\"FlavellPkg\", url=\"git@github.com:flavell-lab/FlavellPkg.jl.git\"); Pkg.add(pkg)"
 julia -e "using Pkg; pkg = Pkg.PackageSpec(name=\"FlavellPkg\", url=\"git@github.com:flavell-lab/FlavellPkg.jl.git\", rev=\"dev\"); Pkg.add(pkg)" #temporary
@@ -52,11 +50,11 @@ julia -e "using FlavellPkg; FlavellPkg.install_default();"
 julia -e "using FlavellPkg; FlavellPkg.install_ANTSUN(false);"
 julia -e "using FlavellPkg; FlavellPkg.install_CePNEM(false);"
 
-# precompile packages
+# precompile julia packages
 julia -e "using Pkg; Pkg.instantiate(); Pkg.precompile();"
 
-# install kernel
+# install julia kernel
 julia -e "using IJulia; IJulia.installkernel(\"Julia\")"
 
-# remove temp src dir
+# remove temp src dir that used to contain the py packages
 rm -rf $path_dir_src_temp
