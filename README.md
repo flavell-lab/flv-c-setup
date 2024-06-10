@@ -68,5 +68,5 @@ julia
 cd flv-c-setup
 sh update-py.sh
 ```
-Note that currently DeepReg, autolabel and euler_gpu are updated to their latest version automatically when you do `sh update-py.sh`.
-However, if you would like to update other python packages owned by `flavell-lab`, you will need to add them to the list by simply editing line 1 of `update-py.sh`
+Note that currently `DeepReg`, `autolabel` and `euler_gpu` are updated to their latest version automatically when you run `sh update-py.sh`.
+If you would like to update other python packages owned by `flavell-lab`, simply add them to the list in line 1 of `update-py.sh`
