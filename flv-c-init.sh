@@ -36,6 +36,7 @@ done
 
 # private py package - pytorch-3dunet, src code will remain in home directory after installation
 pip install matplotlib nd2reader hdbscan tensorboard tensorboardX h5py simpleitk pyyaml
+mkdir -p $path_dir_src
 cd $path_dir_src
 rm -rf $path_dir_src/pytorch-3dunet
 git clone git@github.com:flavell-lab/pytorch-3dunet
