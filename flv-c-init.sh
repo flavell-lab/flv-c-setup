@@ -3,7 +3,7 @@ date_str=$(date +'%Y-%m-%d')
 path_dir_src=/home/$USER/src
 path_dir_src_temp=/home/$USER/setup-src-$date_str
 
-#### julia - pycall
+#### julia - build pycall
 julia -e "import Pkg; ENV[\"PYTHON\"]=\"\";
 	Pkg.add(\"PyCall\"); Pkg.build(\"PyCall\")"
  
@@ -14,50 +14,48 @@ julia -e "import Pkg; ENV[\"PYTHON\"]=\"\";
 # update conda
 conda update --all -y
 
-# torch
-pip install torch torchvision torchaudio
+# public py libraries - torch, tensorflow
+pip install torch torchvision torchaudio 
+python3 -m pip install tensorflow==2.15
 
-# py - unet2d
+# private fork of public library - deepreg
+# private py packages - unet2d, euler_gpu, autolabel
+# src code will be erased from home directory after installation
+repos="unet2d euler_gpu DeepReg autolabel"
 mkdir -p $path_dir_src_temp
-cd $path_dir_src_temp
-rm -rf $path_dir_src_temp/unet2d
-git clone git@github.com:flavell-lab/unet2d.git
-cd $path_dir_src_temp/unet2d
-git checkout v0.1
-pip install .
+for repo in $repos; do
+    cd $path_dir_src_temp
+    rm -rf "$path_dir_src_temp/$repo"  # Remove the existing repository directory, if it exists
+    git clone "git@github.com:flavell-lab/$repo.git" "$path_dir_src_temp/$repo"
+    cd "$path_dir_src_temp/$repo" 
+    if [ "$repo" = "unet2d" ]; then
+        git checkout v0.1
+    fi
+    pip install .
+done
 
-cd $path_dir_src_temp
-rm -rf $path_dir_src_temp/euler_gpu
-git clone git@github.com:flavell-lab/euler_gpu.git
-cd $path_dir_src_temp/euler_gpu
-pip install .
-
-
-# py - pytorch-3dunet
+# private py package - pytorch-3dunet, src code will remain in home directory after installation
 pip install matplotlib nd2reader hdbscan tensorboard tensorboardX h5py simpleitk pyyaml
+mkdir -p $path_dir_src
 cd $path_dir_src
 rm -rf $path_dir_src/pytorch-3dunet
 git clone git@github.com:flavell-lab/pytorch-3dunet
 cd $path_dir_src/pytorch-3dunet
 pip install .
 
-#### julia packages
+#### julia packages again
 julia -e "import Pkg; Pkg.add(\"PyPlot\")" # pyplot
-julia -e "import Pkg; pkg = Pkg.PackageSpec(name=\"FlavellPkg\", url=\"git@github.com:flavell-lab/FlavellPkg.jl.git\"); Pkg.add(pkg)"
+julia -e "using Pkg; pkg = Pkg.PackageSpec(name=\"FlavellPkg\", url=\"git@github.com:flavell-lab/FlavellPkg.jl.git\"); Pkg.add(pkg)"
+# julia -e "using Pkg; pkg = Pkg.PackageSpec(name=\"FlavellPkg\", url=\"git@github.com:flavell-lab/FlavellPkg.jl.git\", rev=\"dev\"); Pkg.add(pkg)" #disabled after testing and merging FlavellPkg.jl#dev
 julia -e "using FlavellPkg; FlavellPkg.install_default();"
 julia -e "using FlavellPkg; FlavellPkg.install_ANTSUN(false);"
 julia -e "using FlavellPkg; FlavellPkg.install_CePNEM(false);"
 
-# precompile packages
+# precompile julia packages
 julia -e "using Pkg; Pkg.instantiate(); Pkg.precompile();"
 
-# install kernel
+# install julia kernel
 julia -e "using IJulia; IJulia.installkernel(\"Julia\")"
 
-#### misc
-# set up lock directory
-mkdir -p ~/lock
-
-# remove temp src dir
+# remove temp src dir that used to contain the py packages
 rm -rf $path_dir_src_temp
-rm /tmp/installer.sh

@@ -47,5 +47,26 @@ else
     start_agent;
 fi
 ```
-
 Close and re-open your shell.
+
+
+## Install packages with flv-c-setup
+### When you are starting from a clean slate (i.e. new, empty Julia environment)
+```
+cd ~
+git clone git@github.com:flavell-lab/flv-c-setup.git
+cd flv-c-setup
+sh flv-c-init.sh
+```
+### When you need to update all julia packages
+```
+julia
+]update
+```
+### When you need to update all python packages
+```
+cd flv-c-setup
+sh update-py.sh
+```
+Note that currently `DeepReg`, `autolabel` and `euler_gpu` are updated to their latest version automatically when you run `sh update-py.sh`.
+If you would like to update other python packages owned by `flavell-lab`, simply add them to the list in line 1 of `update-py.sh`
