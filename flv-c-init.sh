@@ -21,7 +21,7 @@ python3 -m pip install tensorflow==2.15
 # private fork of public library - deepreg
 # private py packages - unet2d, euler_gpu, autolabel
 # src code will be erased from home directory after installation
-repos="unet2d euler_gpu DeepReg autolabel"
+repos="unet2d euler_gpu DeepReg AutoCellLabeler"
 mkdir -p $path_dir_src_temp
 for repo in $repos; do
     cd $path_dir_src_temp
