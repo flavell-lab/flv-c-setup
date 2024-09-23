@@ -14,6 +14,9 @@ julia -e "import Pkg; ENV[\"PYTHON\"]=\"\";
 # update conda
 conda update --all -y
 
+# install Python 3.10 for compatability with Tensorflow 2.15
+conda install python=3.10
+
 # public py libraries - torch, tensorflow
 pip install torch torchvision torchaudio 
 python3 -m pip install tensorflow==2.15
