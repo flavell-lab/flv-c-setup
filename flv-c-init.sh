@@ -59,3 +59,4 @@ julia -e "using IJulia; IJulia.installkernel(\"Julia\")"
 
 # remove temp src dir that used to contain the py packages
 rm -rf $path_dir_src_temp
+rm -rf /tmp/installer.sh
